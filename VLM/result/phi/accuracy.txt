@@ -1,0 +1,51 @@
+prompt: 
+The goal is hunt a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: hunt_cow | label: 1 | acc: 0.64 | ac 32 | step: 50
+env_name: hunt_cow | label: 0 | acc: 0.68 | ac 34 | step: 50
+env_name: hunt_cow | acc: 0.66
+prompt: 
+The goal is milk a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: milk_cow | label: 1 | acc: 0.86 | ac 43 | step: 50
+env_name: milk_cow | label: 0 | acc: 0.96 | ac 48 | step: 50
+env_name: milk_cow | acc: 0.91
+prompt: 
+The goal is hunt a spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 1.0 | ac 50 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.04 | ac 2 | step: 50
+env_name: combat_spider | acc: 0.52
+total acc: 0.6966666666666667
+
+------------------------------------------------------------------------
+prompt: 
+The goal is hunt a spider, consider the spiders in the neighborhood.. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 1.0 | ac 50 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.0 | ac 0 | step: 50
+env_name: combat_spider | acc: 0.5
+total acc: 0.5
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+prompt: 
+The goal is combat a spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 0.98 | ac 49 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.3 | ac 15 | step: 50
+env_name: combat_spider | acc: 0.64
+total acc: 0.64
+------------------------------------------------------------------------
+prompt: 
+The goal is combat spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 1.0 | ac 50 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.04 | ac 2 | step: 50
+env_name: combat_spider | acc: 0.52
+total acc: 0.52

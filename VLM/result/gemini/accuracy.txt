@@ -1,0 +1,23 @@
+------------------------------------------------------------------------
+prompt: 
+The goal is hunt a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: hunt_cow | label: 1 | acc: 0.72 | ac 36 | step: 50
+env_name: hunt_cow | label: 0 | acc: 0.7 | ac 35 | step: 50
+env_name: hunt_cow | acc: 0.71
+prompt: 
+The goal is milk a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: milk_cow | label: 1 | acc: 0.94 | ac 47 | step: 50
+env_name: milk_cow | label: 0 | acc: 0.54 | ac 27 | step: 50
+env_name: milk_cow | acc: 0.74
+prompt: 
+The goal is combat a spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 0.92 | ac 46 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.54 | ac 27 | step: 50
+env_name: combat_spider | acc: 0.73
+total acc: 0.7266666666666667
