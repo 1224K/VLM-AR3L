@@ -61,3 +61,5 @@ COPY thirdparty/omnicli /omnicli
 COPY scripts/docker/run.sh /run.sh
 
 RUN sudo chmod +x /omnicli/omnicli && sudo chmod +x /run.sh
+
+RUN xvfb-run python /home/user/MineDojo/scripts/validate_install.py
