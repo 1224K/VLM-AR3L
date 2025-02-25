@@ -7,10 +7,12 @@ git clone https://github.com/1224K/minedojo.git
 Download [MineCLIP](https://drive.google.com/file/d/1uaZM1ZLBz2dZWcn85rZmjP7LV6Sg5PZW/view) and place the `attn.pth` file in this repository.
 
 ## Build the Docker Images
-```sh
-cd minedojo/docker-minedojo
-docker build -t 1224k/minedojo .
-```
+- ### minedojo
+    ```sh
+    cd minedojo/docker-minedojo
+    docker build -t 1224k/minedojo .
+    ```
+- ### metaworld
 
 ## Run on omni-farm
 ```sh
@@ -34,7 +36,16 @@ scripts/vpn/disconnect.sh
 scripts/vpn/connect.sh
 ```
 
-### 2. Upload to nuclus
+### 2. Save job
+```sh
+scripts/save_job.sh k-minedojo
+scripts/load_job.sh
+
+scripts/save_job.sh k-metaworld
+scripts/load_job.sh
+```
+
+### 3. Upload to nuclus
 ```sh
 cd thirdparty/omnicli
 ./omnicli 
@@ -48,7 +59,7 @@ copy "$path_to_this_repo/attn.pth" "omniverse://nucleus.tpe1.local/Projects/$FAR
 cd ../..
 ```
 
-### 3. Nuclues to mnt
+### 4. Nuclues to mnt
 ```sh
 scripts/submit_task.sh k-copy \
 "/run.sh \

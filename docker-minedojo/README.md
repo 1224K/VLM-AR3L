@@ -5,8 +5,6 @@ A quick reference for using MineDojo in docker container. This may be useful sin
 ## Build the Docker Images
 
 ```sh
-git clone https://github.com/1224K/minedojo.git
-cd minedojo/docker-minedojo
 docker build -t 1224k/minedojo .
 ```
 

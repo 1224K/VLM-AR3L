@@ -7,14 +7,6 @@ import numpy as np
 
 from .dense_reward import AnimalZooDenseRewardWrapper
 
-import sys
-import os
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.abspath(os.path.join(current_dir, "../"))
-sys.path.append(parent_dir)
-import utils
-from VLM import query_prompt
-from VLM import phi
 
 class HuntCowDenseRewardEnv(AnimalZooDenseRewardWrapper):
     def __init__(
@@ -23,9 +15,6 @@ class HuntCowDenseRewardEnv(AnimalZooDenseRewardWrapper):
         nav_reward_scale: float | int,
         attack_reward: float | int,
         success_reward: float | int,
-        reward_mode: str="dense",
-        reward_steps: int=1,
-        reward_noise: float=0.,   
     ):
         max_spawn_range = 10
         distance_to_axis = int(max_spawn_range / np.sqrt(2))
@@ -81,17 +70,6 @@ class HuntCowDenseRewardEnv(AnimalZooDenseRewardWrapper):
         self._elapsed_steps = 0
         self._first_reset = True
 
-        self._reward_mode = reward_mode
-        self._reward_steps = reward_steps
-        self._reward_noise = reward_noise
-        print(f"reward_mode: {self._reward_mode}, reward_steps: {self._reward_steps}, reward_noise: {self._reward_noise}")
-        self._prev_image = None
-        self.vlm_acc = 0
-        self.vlm_cnt = 0
-
-        if self._reward_mode=="phi":
-            self.vlm = phi()
-
     def reset(self, **kwargs):
         self._elapsed_steps = 0
 
@@ -110,38 +88,4 @@ class HuntCowDenseRewardEnv(AnimalZooDenseRewardWrapper):
         if self._elapsed_steps >= self._episode_len:
             done = True
         
-        # dense reward
-        if self._reward_mode=="dense":
-            if self._elapsed_steps % self._reward_steps != 0:
-                reward = 0
-        # simple reward
-        elif self._reward_mode=="simple":
-            simple_reward = 0
-            if self._elapsed_steps % self._reward_steps == 0:
-                simple_reward = 0.1 if reward > 0 else 0
-                # add noise
-                if self._reward_noise > 0 and np.random.rand() < self._reward_noise:
-                    simple_reward = 0 if simple_reward > 0 else 0.1
-            reward = simple_reward
-        # sparse
-        elif self._reward_mode=="sparse":
-            reward = 0 if reward < 10 else 10
-        # phi reward
-        elif self._reward_mode=="phi":
-            vlm_reward = 0
-            if self._elapsed_steps % self._reward_steps == 0:
-                image = utils.obs_to_PIL_image(obs['rgb'])
-                if self._prev_image is not None:
-                    res = self.vlm.query_1([self._prev_image, image, query_prompt.format("hunt a cow")])
-                    if "1" in res:
-                        vlm_reward = 0.1
-                    else:
-                        vlm_reward = 0
-                    
-                    # compute accuracy
-                    if (vlm_reward > 0) == (reward > 0):
-                        self.vlm_acc += 1
-                    self.vlm_cnt += 1
-                self._prev_image = image
-            reward = vlm_reward
         return obs, reward, done, info
