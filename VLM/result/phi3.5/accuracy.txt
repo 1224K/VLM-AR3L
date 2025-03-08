@@ -1,0 +1,154 @@
+prompt: 
+The goal is hunt a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: hunt_cow | label: 1 | acc: 0.64 | ac 32 | step: 50
+env_name: hunt_cow | label: 0 | acc: 0.68 | ac 34 | step: 50
+env_name: hunt_cow | acc: 0.66
+prompt: 
+The goal is milk a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: milk_cow | label: 1 | acc: 0.86 | ac 43 | step: 50
+env_name: milk_cow | label: 0 | acc: 0.96 | ac 48 | step: 50
+env_name: milk_cow | acc: 0.91
+prompt: 
+The goal is hunt a spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 1.0 | ac 50 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.04 | ac 2 | step: 50
+env_name: combat_spider | acc: 0.52
+total acc: 0.6966666666666667
+
+------------------------------------------------------------------------
+prompt: 
+The goal is hunt a spider, consider the spiders in the neighborhood.. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 1.0 | ac 50 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.0 | ac 0 | step: 50
+env_name: combat_spider | acc: 0.5
+total acc: 0.5
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+prompt: 
+The goal is combat a spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 0.98 | ac 49 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.3 | ac 15 | step: 50
+env_name: combat_spider | acc: 0.64
+total acc: 0.64
+------------------------------------------------------------------------
+prompt: 
+The goal is combat spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 1.0 | ac 50 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.04 | ac 2 | step: 50
+env_name: combat_spider | acc: 0.52
+total acc: 0.52
+------------------------------------------------------------------------
+prompt: 
+The goal is to minimize the distance between the green cube and the hole. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: sweep-into-v2 | label: 1 | acc: 0.7 | ac 35 | step: 50
+env_name: sweep-into-v2 | label: 0 | acc: 0.72 | ac 36 | step: 50
+env_name: sweep-into-v2 | acc: 0.71
+prompt: 
+The goal is to move the soccer ball into the goal. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: soccer-v2 | label: 1 | acc: 0.08 | ac 4 | step: 50
+env_name: soccer-v2 | label: 0 | acc: 0.94 | ac 47 | step: 50
+env_name: soccer-v2 | acc: 0.51
+prompt: 
+The goal is to open the drawer. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: drawer-open-v2 | label: 1 | acc: 0.94 | ac 47 | step: 50
+env_name: drawer-open-v2 | label: 0 | acc: 0.16 | ac 8 | step: 50
+env_name: drawer-open-v2 | acc: 0.55
+total acc: 0.59
+------------------------------------------------------------------------
+prompt: 
+The goal is hunt a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: hunt_cow | label: 1 | acc: 0.64 | ac 32 | step: 50
+env_name: hunt_cow | label: 0 | acc: 0.68 | ac 34 | step: 50
+env_name: hunt_cow | acc: 0.66
+prompt: 
+The goal is to minimize the distance between the green cube and the hole. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: sweep-into-v2 | label: 1 | acc: 0.66 | ac 33 | step: 50
+env_name: sweep-into-v2 | label: 0 | acc: 0.72 | ac 36 | step: 50
+env_name: sweep-into-v2 | acc: 0.69
+prompt: 
+The goal is to move the soccer ball into the goal. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: soccer-v2 | label: 1 | acc: 0.1 | ac 5 | step: 50
+env_name: soccer-v2 | label: 0 | acc: 0.94 | ac 47 | step: 50
+env_name: soccer-v2 | acc: 0.52
+prompt: 
+The goal is to open the drawer. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: drawer-open-v2 | label: 1 | acc: 0.92 | ac 46 | step: 50
+env_name: drawer-open-v2 | label: 0 | acc: 0.16 | ac 8 | step: 50
+env_name: drawer-open-v2 | acc: 0.54
+prompt: 
+The goal is milk a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: milk_cow | label: 1 | acc: 0.86 | ac 43 | step: 50
+env_name: milk_cow | label: 0 | acc: 0.94 | ac 47 | step: 50
+env_name: milk_cow | acc: 0.9
+prompt: 
+The goal is combat a spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 0.98 | ac 49 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.28 | ac 14 | step: 50
+env_name: combat_spider | acc: 0.63
+total acc: 0.6566666666666666
+------------------------------------------------------------------------
+prompt: 
+The goal is hunt a spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 1.0 | ac 50 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.04 | ac 2 | step: 50
+env_name: combat_spider | acc: 0.52
+total acc: 0.52
+------------------------------------------------------------------------
+prompt: 
+The goal is combat a spider in plains with a diamond sword. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 0.94 | ac 47 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.24 | ac 12 | step: 50
+env_name: combat_spider | acc: 0.59
+total acc: 0.59
+------------------------------------------------------------------------
+prompt: 
+The goal is find and combat a spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 0.94 | ac 47 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.14 | ac 7 | step: 50
+env_name: combat_spider | acc: 0.54
+total acc: 0.54
+------------------------------------------------------------------------
+prompt: 
+The goal is combat a spider. spider in minecraft are black. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 0.98 | ac 49 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.1 | ac 5 | step: 50
+env_name: combat_spider | acc: 0.54
+total acc: 0.54

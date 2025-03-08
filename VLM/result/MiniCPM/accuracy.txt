@@ -31,3 +31,72 @@ env_name: combat_spider | label: 1 | acc: 0.96 | ac 48 | step: 50
 env_name: combat_spider | label: 0 | acc: 0.4 | ac 20 | step: 50
 env_name: combat_spider | acc: 0.68
 total acc: 0.68
+------------------------------------------------------------------------
+prompt: 
+The goal is to minimize the distance between the green cube and the hole. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: sweep-into-v2 | label: 1 | acc: 0.92 | ac 46 | step: 50
+env_name: sweep-into-v2 | label: 0 | acc: 0.76 | ac 38 | step: 50
+env_name: sweep-into-v2 | acc: 0.84
+prompt: 
+The goal is to move the soccer ball into the goal. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: soccer-v2 | label: 1 | acc: 0.26 | ac 13 | step: 50
+env_name: soccer-v2 | label: 0 | acc: 0.9 | ac 45 | step: 50
+env_name: soccer-v2 | acc: 0.58
+prompt: 
+The goal is to open the drawer. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: drawer-open-v2 | label: 1 | acc: 0.98 | ac 49 | step: 50
+env_name: drawer-open-v2 | label: 0 | acc: 0.18 | ac 9 | step: 50
+env_name: drawer-open-v2 | acc: 0.58
+total acc: 0.6666666666666666
+------------------------------------------------------------------------
+prompt: 
+The goal is to minimize the distance between the green cube and the hole. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: sweep-into-v2 | label: 1 | acc: 0.88 | ac 44 | step: 50
+env_name: sweep-into-v2 | label: 0 | acc: 0.84 | ac 42 | step: 50
+env_name: sweep-into-v2 | acc: 0.86
+prompt: 
+The goal is to move the soccer ball into the goal. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: soccer-v2 | label: 1 | acc: 0.54 | ac 27 | step: 50
+env_name: soccer-v2 | label: 0 | acc: 0.26 | ac 13 | step: 50
+env_name: soccer-v2 | acc: 0.4
+prompt: 
+The goal is to open the drawer. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: drawer-open-v2 | label: 1 | acc: 0.72 | ac 36 | step: 50
+env_name: drawer-open-v2 | label: 0 | acc: 0.76 | ac 38 | step: 50
+env_name: drawer-open-v2 | acc: 0.74
+total acc: 0.6666666666666666
+------------------------------------------------------------------------
+prompt: 
+The goal is hunt a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: hunt_cow | label: 1 | acc: 0.9 | ac 45 | step: 50
+env_name: hunt_cow | label: 0 | acc: 0.16 | ac 8 | step: 50
+env_name: hunt_cow | acc: 0.53
+prompt: 
+The goal is milk a cow. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: milk_cow | label: 1 | acc: 0.96 | ac 48 | step: 50
+env_name: milk_cow | label: 0 | acc: 0.32 | ac 16 | step: 50
+env_name: milk_cow | acc: 0.64
+prompt: 
+The goal is combat a spider. Is Image 2 more likely to achieve the goal? 
+Reply a single line of 1 if yes, otherwise 0.
+
+env_name: combat_spider | label: 1 | acc: 0.98 | ac 49 | step: 50
+env_name: combat_spider | label: 0 | acc: 0.22 | ac 11 | step: 50
+env_name: combat_spider | acc: 0.6
+total acc: 0.59

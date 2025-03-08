@@ -4,10 +4,16 @@ from transformers import AutoModelForCausalLM
 from transformers import AutoProcessor 
 import time
 import os
-model_id = "microsoft/Phi-3.5-vision-instruct" 
 
 class phi:
-    def __init__(self):
+    def __init__(self, version="3.5"):
+        if version == "4":
+            # transformers==4.48.2
+            # backoff==2.2.1
+            # peft==0.13.2
+            model_id = "microsoft/Phi-4-multimodal-instruct"
+        elif version == "3.5":
+            model_id = "microsoft/Phi-3.5-vision-instruct" 
         # Note: set _attn_implementation='eager' if you don't have flash_attn installed
         self.model = AutoModelForCausalLM.from_pretrained(
             model_id, 
@@ -23,7 +29,6 @@ class phi:
         )
 
     def query_1(self, query_list): 
-        # beg = time.time()
         images = []
         placeholder = ""
         for i in range(2): 
@@ -59,8 +64,6 @@ class phi:
             clean_up_tokenization_spaces=False)[0] 
 
         # print(response)
-        # end = time.time()
-        # print("time elapsed: ", end - beg)
         return response[-1].strip().lstrip()
 
     def query_2(self, query_list, summary_prompt): 
@@ -146,6 +149,8 @@ if __name__ == "__main__":
 
     for env_name in os.listdir(image_dir):
         if os.path.isdir(image_dir + env_name) == False:
+            continue
+        if env_name not in ["soccer-v2", "sweep-into-v2", "drawer-open-v2"]:
             continue
         print("env_name:", env_name)
         acc = {0:0, 1:0}

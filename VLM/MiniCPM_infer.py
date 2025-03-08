@@ -6,10 +6,31 @@ import time
 import torch
 import os
 
-model = AutoModel.from_pretrained('openbmb/MiniCPM-V-2_6', trust_remote_code=True,
-    attn_implementation='sdpa', torch_dtype=torch.bfloat16) # sdpa or flash_attention_2, no eager
+# model = AutoModel.from_pretrained('openbmb/MiniCPM-V-2_6', trust_remote_code=True,
+#     attn_implementation='sdpa', torch_dtype=torch.bfloat16) # sdpa or flash_attention_2, no eager
+# model = model.eval().cuda()
+# tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-V-2_6', trust_remote_code=True)
+
+## MiniCPM-o 2.6
+# load omni model default, the default init_vision/init_audio/init_tts is True
+# if load vision-only model, please set init_audio=False and init_tts=False
+# if load audio-only model, please set init_vision=False
+model = AutoModel.from_pretrained(
+    'openbmb/MiniCPM-o-2_6',
+    trust_remote_code=True,
+    attn_implementation='sdpa', # sdpa or flash_attention_2
+    torch_dtype=torch.bfloat16,
+    init_vision=True,
+    init_audio=False,
+    init_tts=False
+)
+
+
 model = model.eval().cuda()
-tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-V-2_6', trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-o-2_6', trust_remote_code=True)
+
+# In addition to vision-only mode, tts processor and vocos also needs to be initialized
+# model.init_tts()
 
 def MiniCPM_query(query_list, summary_prompt, temperature=0.1):
     beg = time.time()
@@ -160,6 +181,8 @@ if __name__ == "__main__":
 
     for env_name in os.listdir(image_dir):
         if os.path.isdir(image_dir + env_name) == False:
+            continue
+        if env_name in ["soccer-v2", "sweep-into-v2", "drawer-open-v2"]:
             continue
         print("env_name:", env_name)
         acc = {0:0, 1:0}

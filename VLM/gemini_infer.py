@@ -10,9 +10,10 @@ import numpy as np
 
 genai.configure(api_key=os.environ['GEMINI_API_KEY'])
 
-model = genai.GenerativeModel('gemini-1.5-flash')
+# model = genai.GenerativeModel('gemini-1.5-flash')
 text_model = genai.GenerativeModel('gemini-1.5-flash')
         
+model = genai.GenerativeModel('gemini-2.0-flash-001')
 def gemini_query_1(query_list, temperature=0):
     beg = time.time()
 
@@ -158,12 +159,14 @@ if __name__ == "__main__":
 
     table_acc = {}
     table_step = {}
-    if not os.path.exists(f"./result/gemini"):
-        os.makedirs(f"./result/gemini")
+    if not os.path.exists(f"./result/gemini2.0"):
+        os.makedirs(f"./result/gemini2.0")
 
     for env_name in os.listdir(image_dir):
         if os.path.isdir(image_dir + env_name) == False:
             continue
+        # if env_name not in ["soccer-v2", "sweep-into-v2", "drawer-open-v2"]:
+        #     continue
         print("env_name:", env_name)
         acc = {0:0, 1:0}
         step = 0
@@ -236,7 +239,7 @@ if __name__ == "__main__":
             table_step[env_name][label_i] = i
     total_acc = 0
     total_step = 0
-    with open(f"./result/gemini/accuracy.txt", "a") as f:
+    with open(f"./result/gemini2.0/accuracy.txt", "a") as f:
         f.write(f"------------------------------------------------------------------------\n")
         for env_name in table_acc:
             f.write(f"prompt: {query_prompt.format(task_prompt[env_name])}\n")
