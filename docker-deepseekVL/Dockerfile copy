@@ -1,0 +1,58 @@
+# 第一階段：準備帶有 CUDA 工具的環境
+FROM nvidia/cuda:12.1.0-devel-ubuntu20.04 AS cuda-env
+
+# 安裝 Miniconda
+RUN apt-get update && apt-get install -y git wget && \
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \
+    rm Miniconda3-latest-Linux-x86_64.sh
+
+# 設置 Conda 環境變數
+ENV PATH="/opt/conda/bin:$PATH"
+
+# 設置工作目錄
+WORKDIR /app
+
+# 複製 environment.yml
+COPY environment.yml .
+
+# 創建 Conda 環境
+RUN conda env create -f environment.yml
+
+# 使用 Conda 環境作為默認環境
+SHELL ["/bin/bash", "-c"]
+
+# **使用 pip 安裝 PyTorch**
+RUN conda run -n deepseekVL pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# MineCLIP
+# wheel==0.38.4
+RUN conda run -n deepseekVL python -m pip install "setuptools<59.6" wheel==0.38.4 --retries 100
+COPY MineCLIP /home/user/MineCLIP
+RUN conda run -n deepseekVL python -m pip install --no-user --retries 100 -e /home/user/MineCLIP
+
+# 卸载 minedojo
+RUN conda run -n deepseekVL pip uninstall -y minedojo
+RUN conda run -n deepseekVL python -m pip uninstall -y minedojo
+
+# MineDojo
+COPY MineDojo /home/user/MineDojo
+RUN conda run -n deepseekVL python -m pip install --no-user --retries 100 -e /home/user/MineDojo
+
+# Tools and scripts for Omniverse Farm
+COPY thirdparty/omnicli /omnicli
+COPY scripts/docker/run.sh /run.sh
+
+ENTRYPOINT ["/bin/bash", "-c", "source /opt/conda/etc/profile.d/conda.sh && conda activate deepseekVL && exec bash"]
+RUN chmod +x /omnicli/omnicli && chmod +x /run.sh
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    apt-get install ffmpeg libsm6 libxext6  -y
+RUN apt-get install -y xvfb
+
+RUN apt update -y && apt install -y software-properties-common && \
+    add-apt-repository ppa:openjdk-r/ppa && apt update -y && \
+    apt install -y openjdk-8-jdk
+
+RUN update-alternatives --config java
+# RUN xvfb-run python /home/user/MineDojo/scripts/validate_install.py

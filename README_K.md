@@ -3,6 +3,9 @@
 scripts/save_job.sh k-minedojo
 scripts/load_job.sh
 
+scripts/save_job.sh k-deepseek
+scripts/load_job.sh
+
 scripts/save_job.sh k-metaworld
 scripts/load_job.sh
 ```
@@ -23,17 +26,23 @@ scripts/vpn/connect.sh
     copy "/home/mislab/Desktop/K/test_progressivity_mode/ppo_mineclip.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/ppo_mineclip.py"
     copy "/home/mislab/Desktop/K/test_progressivity_mode/utils.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/utils.py"
     copy "/home/mislab/Desktop/K/test_progressivity_mode/VLM/phi_infer.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/VLM/phi_infer.py"
+    copy "/home/mislab/Desktop/K/test_progressivity_mode/VLM/clip_infer.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/VLM/clip_infer.py"
+    copy "/home/mislab/Desktop/K/test_progressivity_mode/VLM/QwenVL_infer.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/VLM/QwenVL_infer.py"
     copy "/home/mislab/Desktop/K/test_progressivity_mode/VLM/prompt.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/VLM/prompt.py"
+    copy "/home/mislab/Desktop/K/test_progressivity_mode/VLM/__init__.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/VLM/__init__.py"
+    copy "/home/mislab/Desktop/K/test_progressivity_mode/VLM/deepseekVL_infer.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/VLM/deepseekVL_infer.py"
+    copy "/home/mislab/Desktop/K/test_progressivity_mode/test_vlm.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/test_vlm.py"
     copy "/home/mislab/Desktop/K/test_progressivity_mode/mob_combat/combat_spider.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/mob_combat/combat_spider.py"
     copy "/home/mislab/Desktop/K/test_progressivity_mode/animal_zoo/milk_cow.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/animal_zoo/milk_cow.py"
     copy "/home/mislab/Desktop/K/test_progressivity_mode/animal_zoo/hunt_cow.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/animal_zoo/hunt_cow.py"
     copy "/home/mislab/Desktop/K/test_progressivity_mode/reward_model.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/reward_model.py"
     copy "/home/mislab/Desktop/K/test_progressivity_mode/conv_net.py" "omniverse://nucleus.tpe1.local/Projects/K/minedojo/conv_net.py"
 
-    copy "omniverse://nucleus.tpe1.local/Projects/K/minedojo/gifs/minedojo" "/home/mislab/Desktop/K/test_progressivity_mode/gifs/minedojo"
-    copy "omniverse://nucleus.tpe1.local/Projects/K/minedojo/logs/minedojo" "/home/mislab/Desktop/K/test_progressivity_mode/logs/minedojo"
-    copy "omniverse://nucleus.tpe1.local/Projects/K/minedojo/tensorboard/minedojo" "/home/mislab/Desktop/K/test_progressivity_mode/tensorboard/minedojo"
-    copy "omniverse://nucleus.tpe1.local/Projects/K/minedojo/model/minedojo" "/home/mislab/Desktop/K/test_progressivity_mode/model/minedojo"
+    <!-- gif: combat_spider and hunt_cow,  model: all -->
+    copy "omniverse://nucleus.tpe1.local/Projects/K/minedojo/gifs/minedojo/combat_spider/ppo/phi_n4_k16_noise0.0" "/home/mislab/Desktop/K/test_progressivity_mode/gifs/minedojo/combat_spider/ppo/phi_n4_k16_noise0.0"
+    copy "omniverse://nucleus.tpe1.local/Projects/K/minedojo/logs/metaworld/drawer-open-v2/sac/sparse_n1_k16_noise0.0" "/home/mislab/Desktop/K/test_progressivity_mode/logs/metaworld/drawer-open-v2/sac/sparse_n1_k16_noise0.0"
+    copy "omniverse://nucleus.tpe1.local/Projects/K/minedojo/tensorboard/minedojo/combat_spider/ppo/phi_n4_k16_noise0.0" "/home/mislab/Desktop/K/test_progressivity_mode/tensorboard/minedojo/combat_spider/ppo/phi_n4_k16_noise0.0"
+    copy "omniverse://nucleus.tpe1.local/Projects/K/minedojo/model/minedojo/combat_spider/ppo/phi_n4_k16_noise0.0" "/home/mislab/Desktop/K/test_progressivity_mode/model/minedojo/combat_spider/ppo/phi_n4_k16_noise0.0"
     cd ../..
     ```
 - ### metaworld
@@ -63,7 +72,7 @@ scripts/vpn/connect.sh
     auth omniverse nvidia
     copy "/home/mislab/Desktop/K/RL-VLM-F" "omniverse://nucleus.tpe1.local/Projects/K/RL-VLM-F"
 
-    copy "omniverse://nucleus.tpe1.local/Projects/K/RL-VLM-F/exp" "/home/mislab/Desktop/K/RL-VLM-F/exp"
+    copy "omniverse://nucleus.tpe1.local/Projects/K/RL-VLM-F/exp/gt_task_reward" "/home/mislab/Desktop/K/RL-VLM-F/exp/gt_task_reward"
     ```
 
 # Copy
@@ -86,6 +95,16 @@ scripts/vpn/connect.sh
         'mkdir model' \
         'mkdir gifs' \
         'cd ..' \
+        'ls'" \
+    "nuclues -> mnt: minedojo"
+    ```
+
+    ```sh
+    scripts/submit_task.sh k-copy \
+    "/run.sh \
+        --download-src 'omniverse://$NUCLEUS_HOSTNAME/Projects/$FARM_USER/minedojo/VLM/deepseekVL_infer.py' \
+        --download-dest '/mnt/nfs/$FARM_USER/minedojo/VLM/deepseekVL_infer.py' \
+        'cd /mnt/nfs/$FARM_USER/minedojo' \
         'ls'" \
     "nuclues -> mnt: minedojo"
     ```
@@ -155,7 +174,7 @@ export TASK="combat_spider_phi_n16_noise0.0"
 # train
 - ## minedojo
     ```sh
-    scripts/submit_task.sh k-minedojo \
+    scripts/submit_task.sh k-deepseek \
     "/run.sh \
         'sudo mkdir -p /src' \
         'cd /src' \
@@ -176,8 +195,11 @@ export TASK="combat_spider_phi_n16_noise0.0"
         'export HF_MODULES_CACHE=/mnt/nfs/$FARM_USER/hf_modules_cache' \
         'sudo chmod -R 777 /src' \
         'sudo chmod -R 777 /mnt/nfs/$FARM_USER' \
-        'xvfb-run python ppo_mineclip.py --mode train --env minedojo --task combat_spider --algo ppo --reward_mode RL-VLM-F --seed 1'" \
-    "combat_spider RL-VLM-F seed1"
+        'sudo mkdir -p /home/ubuntu' \
+        'sudo chmod -R 777 /home/ubuntu' \
+        'sudo /opt/conda/bin/python3.9 -m pip install --no-user git+https://github.com/openai/CLIP.git --use-deprecated=legacy-resolver' \
+        'xvfb-run python ppo_mineclip.py --mode train --env minedojo --task combat_spider --algo ppo --reward_mode deepseekVL --reward_steps 4 --reward_k 4 --seed 1'" \
+    "combat_spider phi_n4_k4 seed1"
     ```
 
 - ## metaworld
@@ -204,8 +226,8 @@ export TASK="combat_spider_phi_n16_noise0.0"
         'export HF_MODULES_CACHE=/mnt/nfs/$FARM_USER/hf_modules_cache' \
         'sudo chmod -R 777 /src' \
         'sudo chmod -R 777 /mnt/nfs/$FARM_USER' \
-        'xvfb-run python ppo_mineclip.py --mode train --env metaworld --task drawer-open-v2 --algo sac --reward_mode phi --reward_steps 16 --seed 2-3'" \
-    "drawer-open-v2 phi --reward_steps 16 seed2-3"
+        'xvfb-run python ppo_mineclip.py --mode train --env metaworld --task drawer-open-v2 --algo sac --reward_mode phi --reward_steps 4 --reward_k 4 --seed 3'" \
+    "drawer-open-v2 phi --reward_steps 4 --reward_k 4 --seed 3"
     ```
 
     ### sweep-into-v2
@@ -231,8 +253,8 @@ export TASK="combat_spider_phi_n16_noise0.0"
         'export HF_MODULES_CACHE=/mnt/nfs/$FARM_USER/hf_modules_cache' \
         'sudo chmod -R 777 /src' \
         'sudo chmod -R 777 /mnt/nfs/$FARM_USER' \
-        'xvfb-run python ppo_mineclip.py --mode train --env metaworld --task sweep-into-v2 --algo sac --reward_mode dense'" \
-    "sweep-into-v2 dense"
+        'xvfb-run python ppo_mineclip.py --mode train --env metaworld --task sweep-into-v2 --algo sac --reward_mode phi --reward_steps 4 --reward_k 4 --seed 1'" \
+    "sweep-into-v2 phi --reward_steps 4 --reward_k 4 --seed 1"
     ```
     
     ### soccer-v2
@@ -258,8 +280,8 @@ export TASK="combat_spider_phi_n16_noise0.0"
         'export HF_MODULES_CACHE=/mnt/nfs/$FARM_USER/hf_modules_cache' \
         'sudo chmod -R 777 /src' \
         'sudo chmod -R 777 /mnt/nfs/$FARM_USER' \
-        'xvfb-run python ppo_mineclip.py --mode train --env metaworld --task soccer-v2 --algo sac --reward_mode phi --reward_steps 16 --seed 2-3'" \
-    "soccer-v2 phi --reward_steps 16 seed2-3"
+        'xvfb-run python ppo_mineclip.py --mode train --env metaworld --task soccer-v2 --algo sac --reward_mode phi --reward_steps 4 --reward_k 4 --seed 3'" \
+    "soccer-v2 phi --reward_steps 4 --reward_k 4 --seed 3"    
     ```
 
 - ## RL-VLM-F
@@ -461,9 +483,9 @@ export TASK="combat_spider_phi_n16_noise0.0"
         'sudo /opt/conda/bin/python3.9 -m pip install --no-user omegaconf==2.1.2 --use-deprecated=legacy-resolver' \
         'xvfb-run python train_PEBBLE.py \
             env=metaworld_sweep-into-v2 \
-            seed=1 \
-            exp_name=clip \
-            reward=clip_image_text_matching \
+            seed=3 \
+            exp_name=gt_task_reward \
+            reward=gt_task_reward \
             vlm_label=1 \
             vlm=clip \
             image_reward=1 \
@@ -478,7 +500,7 @@ export TASK="combat_spider_phi_n16_noise0.0"
             diag_gaussian_actor.params.hidden_dim=256 diag_gaussian_actor.params.hidden_depth=3  \
             feed_type=0 teacher_beta=-1 teacher_gamma=1  teacher_eps_skip=0 teacher_eps_equal=0 \
             num_eval_episodes=1'" \
-    "RL-VLM-F sweep-into-v2 seed=1"
+    "RL-VLM-F sweep-into-v2 seed=3"
     ```
 
     #### soccer-v2
@@ -538,14 +560,22 @@ export TASK="combat_spider_phi_n16_noise0.0"
         'sudo cp -r /mnt/nfs/$FARM_USER/minedojo/animal_zoo /src/animal_zoo' \
         'sudo cp -r /mnt/nfs/$FARM_USER/minedojo/mob_combat /src/mob_combat' \
         'sudo cp -r /mnt/nfs/$FARM_USER/minedojo/VLM /src/VLM' \
+        'sudo cp  /mnt/nfs/$FARM_USER/minedojo/reward_model.py /src/reward_model.py' \
+        'sudo cp  /mnt/nfs/$FARM_USER/minedojo/conv_net.py /src/conv_net.py' \
         'sudo ln -s /mnt/nfs/$FARM_USER/minedojo/tensorboard /src/tensorboard' \
         'sudo ln -s /mnt/nfs/$FARM_USER/minedojo/model /src/model' \
         'sudo ln -s /mnt/nfs/$FARM_USER/minedojo/gifs /src/gifs' \
         'sudo ln -s /mnt/nfs/$FARM_USER/minedojo/logs /src/logs_result' \
+        'export MPLCONFIGDIR=/mnt/nfs/$FARM_USER/matplotlib_cache' \
+        'export HF_HOME=/mnt/nfs/$FARM_USER/huggingface_cache' \
+        'export HF_MODULES_CACHE=/mnt/nfs/$FARM_USER/hf_modules_cache' \
         'sudo chmod -R 777 /src' \
         'sudo chmod -R 777 /mnt/nfs/$FARM_USER' \
-        'xvfb-run python ppo_mineclip.py --mode eval --task combat_spider --reward_mode clip --reward_steps 16 --reward_noise 0.0'" \
-    "eval combat_spider_phi_n16_noise0.0"
+        'sudo mkdir -p /home/ubuntu' \
+        'sudo chmod -R 777 /home/ubuntu' \
+        'sudo /opt/conda/bin/python3.9 -m pip install --no-user git+https://github.com/openai/CLIP.git --use-deprecated=legacy-resolver' \
+        'xvfb-run python ppo_mineclip.py --mode eval --env minedojo --task milk_cow --algo ppo --reward_mode phi --reward_steps 4 --reward_k 16'" \
+    "eval milk_cow phi_n4_k16"
     ```
 
 - ## metaworld
@@ -598,3 +628,22 @@ export TASK="combat_spider_phi_n16_noise0.0"
             num_eval_episodes=1 mode=eval agent_model_load_dir=/home/mislab/Desktop/K/RL-VLM-F/exp/phi/metaworld_soccer-v2/2025-01-18-09-07-47/vlm_1phi_rewardlearn_from_preference_H256_L3_lr0.0003/teacher_b-1_g1_m0_s0_e0/label_smooth_0.0/schedule_0/PEBBLE_init1000_unsup9000_inter4000_maxfeed20000_seg1_acttanh_Rlr0.0001_Rbatch40_Rupdate5_en3_sample0_large_batch10_seed2/models \
             reward_model_load_dir=/home/mislab/Desktop/K/RL-VLM-F/exp/phi/metaworld_soccer-v2/2025-01-18-09-07-47/vlm_1phi_rewardlearn_from_preference_H256_L3_lr0.0003/teacher_b-1_g1_m0_s0_e0/label_smooth_0.0/schedule_0/PEBBLE_init1000_unsup9000_inter4000_maxfeed20000_seg1_acttanh_Rlr0.0001_Rbatch40_Rupdate5_en3_sample0_large_batch10_seed2/models
 ```
+
+# test_vlm
+```sh
+    scripts/submit_task.sh k-deepseek \
+    "/run.sh \
+        'mkdir -p /src' \
+        'cd /src' \
+        'cp -r /mnt/nfs/$FARM_USER/minedojo/VLM /src/VLM' \
+        'cp -r /mnt/nfs/$FARM_USER/minedojo/test_vlm.py /src/test_vlm.py' \
+        'export MPLCONFIGDIR=/mnt/nfs/$FARM_USER/matplotlib_cache' \
+        'export HF_HOME=/mnt/nfs/$FARM_USER/huggingface_cache' \
+        'export HF_MODULES_CACHE=/mnt/nfs/$FARM_USER/hf_modules_cache' \
+        'chmod -R 777 /src' \
+        'chmod -R 777 /mnt/nfs/$FARM_USER' \
+        'mkdir -p /home/ubuntu' \
+        'source /opt/conda/bin/activate deepseekVL' \
+        'python test_vlm.py --vlm deepseekVL2'" \
+    "test_vlm.py --vlm deepseekVL2"
+    ```

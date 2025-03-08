@@ -31,7 +31,6 @@ COPY --from=cuda-env /usr/local/lib/python3.9/site-packages/flash_attn /opt/cond
 COPY --from=cuda-env /usr/local/lib/python3.9/site-packages/flash_attn-2.5.8.dist-info /opt/conda/lib/python3.9/site-packages/flash_attn-2.5.8.dist-info
 COPY --from=cuda-env /usr/local/lib/python3.9/site-packages/flash_attn_2_cuda.cpython-39-x86_64-linux-gnu.so /opt/conda/lib/python3.9/site-packages/
 
-
 # 設置環境變數
 ENV PATH=/usr/local/cuda/bin:$PATH
 ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
