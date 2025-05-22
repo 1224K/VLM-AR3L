@@ -20,4 +20,6 @@ git+https://github.com/openai/CLIP.git
 hydra-core==1.0.0
 omegaconf==2.1.2
 gym==0.25.2
-clip==1.0
+pyquaternion==0.9.5
+shapely==2.0.7
+pybind11
