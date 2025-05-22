@@ -12,5 +12,7 @@ Download [MineCLIP](https://drive.google.com/file/d/1uaZM1ZLBz2dZWcn85rZmjP7LV6S
     ```
 
 ## Run task
-'xvfb-run python ppo_mineclip.py --mode train --task milk_cow --reward_mode VLM-R3L --vlm phi3.5'"
+```sh
+xvfb-run python ppo_mineclip.py --mode train --task milk_cow --reward_mode VLM-R3L --vlm phi3.5
+```
 
