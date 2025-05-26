@@ -1,4 +1,5 @@
 ![Framework](docs/framework.png)
+![CartPole](docs/cartpole.gif)
 
 # VLM-R3L
 
