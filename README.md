@@ -1,4 +1,4 @@
-![Framework](docs/img/framework.png)
+![Framework](docs/framework.png)
 
 # VLM-R3L
 
