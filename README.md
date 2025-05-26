@@ -3,11 +3,11 @@
 
 ## Demo
 <p align="center">
-  <img src="demo/cartpole.gif"  alt="CartPole"        width="240"/>
-  <img src="demo/rope.gif"      alt="Straighten Rope" width="240"/>
-  <img src="demo/pass_water.gif" alt="Pass Water"     width="240"/>
-  <img src="demo/soccer.gif" alt="Soccer"     width="240"/>
-  <img src="demo/sweep_into.gif" alt="Sweep Into"     width="240"/>
+  <img src="demo/cartpole.gif"  alt="CartPole"        width="144"/>
+  <img src="demo/rope.gif"      alt="Straighten Rope" width="144"/>
+  <img src="demo/pass_water.gif" alt="Pass Water"     width="144"/>
+  <img src="demo/soccer.gif" alt="Soccer"     width="144"/>
+  <img src="demo/sweep_into.gif" alt="Sweep Into"     width="144"/>
 </p>
 
 ## Setup
