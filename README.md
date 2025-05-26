@@ -15,7 +15,7 @@
   <img src="demo/combat_spider.gif"      alt="Combat Spider" width="180"/>
   <img src="demo/milk_cow.gif" alt="Milk Cow"     width="180"/>
   <img src="demo/shear_sheep.gif" alt="Shear Sheep"     width="180"/>
-  <!-- <img src="demo/hunt_cow.gif" alt="Hunt Cow"     width="180"/> -->
+  <img src="demo/hunt_cow.gif" alt="Hunt Cow"     width="180"/>
 </p>
 ## Setup
 
