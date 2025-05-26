@@ -1,7 +1,8 @@
-![Framework](docs/framework.png)
-![CartPole](docs/cartpole.gif)
-
 # VLM-R3L
+![Framework](docs/framework.png)
+
+## Demo
+![CartPole](docs/cartpole.gif)
 
 ## Setup
 
