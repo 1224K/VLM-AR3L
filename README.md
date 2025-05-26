@@ -1,3 +1,5 @@
+![Framework](docs/img/framework.png)
+
 # VLM-R3L
 
 ## Setup
