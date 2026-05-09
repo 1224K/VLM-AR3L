@@ -116,39 +116,3 @@ env_name: combat_spider | label: 1 | acc: 0.98 | ac 49 | step: 50
 env_name: combat_spider | label: 0 | acc: 0.28 | ac 14 | step: 50
 env_name: combat_spider | acc: 0.63
 total acc: 0.6566666666666666
-------------------------------------------------------------------------
-prompt: 
-The goal is hunt a spider. Is Image 2 more likely to achieve the goal? 
-Reply a single line of 1 if yes, otherwise 0.
-
-env_name: combat_spider | label: 1 | acc: 1.0 | ac 50 | step: 50
-env_name: combat_spider | label: 0 | acc: 0.04 | ac 2 | step: 50
-env_name: combat_spider | acc: 0.52
-total acc: 0.52
-------------------------------------------------------------------------
-prompt: 
-The goal is combat a spider in plains with a diamond sword. Is Image 2 more likely to achieve the goal? 
-Reply a single line of 1 if yes, otherwise 0.
-
-env_name: combat_spider | label: 1 | acc: 0.94 | ac 47 | step: 50
-env_name: combat_spider | label: 0 | acc: 0.24 | ac 12 | step: 50
-env_name: combat_spider | acc: 0.59
-total acc: 0.59
-------------------------------------------------------------------------
-prompt: 
-The goal is find and combat a spider. Is Image 2 more likely to achieve the goal? 
-Reply a single line of 1 if yes, otherwise 0.
-
-env_name: combat_spider | label: 1 | acc: 0.94 | ac 47 | step: 50
-env_name: combat_spider | label: 0 | acc: 0.14 | ac 7 | step: 50
-env_name: combat_spider | acc: 0.54
-total acc: 0.54
-------------------------------------------------------------------------
-prompt: 
-The goal is combat a spider. spider in minecraft are black. Is Image 2 more likely to achieve the goal? 
-Reply a single line of 1 if yes, otherwise 0.
-
-env_name: combat_spider | label: 1 | acc: 0.98 | ac 49 | step: 50
-env_name: combat_spider | label: 0 | acc: 0.1 | ac 5 | step: 50
-env_name: combat_spider | acc: 0.54
-total acc: 0.54

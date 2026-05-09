@@ -1,15 +1,9 @@
 # torch >= 2.3.1
 class QwenVL:
-    def __init__(self, version="7B"):
+    def __init__(self):
         from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
         # specify the path to the model
-        if version == "3B":
-            model_path = "Qwen/Qwen2.5-VL-3B-Instruct"
-        elif version == "7B":
-            model_path = "Qwen/Qwen2.5-VL-7B-Instruct"
-        elif version == "72B":
-            model_path = "Qwen/Qwen2.5-VL-72B-Instruct"
-
+        model_path = "Qwen/Qwen2.5-VL-7B-Instruct"
         self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(model_path, torch_dtype="auto", device_map="auto")
         self.processor = AutoProcessor.from_pretrained(model_path)
 

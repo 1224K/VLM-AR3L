@@ -42,21 +42,3 @@ env_name: combat_spider | label: 1 | acc: 0.8 | ac 40 | step: 50
 env_name: combat_spider | label: 0 | acc: 0.9 | ac 45 | step: 50
 env_name: combat_spider | acc: 0.85
 total acc: 0.6266666666666667
-------------------------------------------------------------------------
-prompt: 
-The goal is combat a spider. Is Image 2 more likely to achieve the goal? 
-Reply a single line of 1 if yes, otherwise 0.
-
-env_name: combat_spider | label: 1 | acc: 0.8 | ac 40 | step: 50
-env_name: combat_spider | label: 0 | acc: 0.92 | ac 46 | step: 50
-env_name: combat_spider | acc: 0.86
-total acc: 0.86
-------------------------------------------------------------------------
-prompt: 
-The goal is combat a spider. Is Image 2 more likely to achieve the goal? 
-Reply a single line of 1 if yes, otherwise 0.
-
-env_name: combat_spider | label: 1 | acc: 0.8 | ac 40 | step: 50
-env_name: combat_spider | label: 0 | acc: 0.9 | ac 45 | step: 50
-env_name: combat_spider | acc: 0.85
-total acc: 0.85

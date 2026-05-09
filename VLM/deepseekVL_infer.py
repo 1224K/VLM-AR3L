@@ -62,4 +62,50 @@ class deepseekVL:
         # print(f"{prepare_inputs['sft_format'][0]}", answer)
         return answer
     
+    def query_2(self, query_list, verbose=False):
+        image1, image2, query_prompt, summary_prompt = query_list
+        conversation = [
+            {
+                "role": "<|User|>",
+                "content": "This is image_1: <image>\n"
+                            "This is image_2: <image>\n"
+                            f'{query_prompt}',
+                "images": [
+                    image1,
+                    image2,
+                ],
+            },
+            {"role": "<|Assistant|>", "content": ""}
+        ]
+
+        prepare_inputs = self.vl_chat_processor(
+            conversations=conversation,
+            images=[image1, image2],
+            force_batchify=True,
+            system_prompt=""
+        ).to(self.vl_gpt.device)
+
+
+        # run image encoder to get the image embeddings
+        inputs_embeds = self.vl_gpt.prepare_inputs_embeds(**prepare_inputs)
+        attention_mask = prepare_inputs.attention_mask
+
+        # run the model to get the response
+        outputs = self.vl_gpt.language.generate(
+            inputs_embeds=inputs_embeds,
+            attention_mask=attention_mask,
+            pad_token_id=self.tokenizer.eos_token_id,
+            bos_token_id=self.tokenizer.bos_token_id,
+            eos_token_id=self.tokenizer.eos_token_id,
+            max_new_tokens=512,
+            do_sample=False,
+            use_cache=True
+        )
+
+        res1 = self.tokenizer.decode(outputs[0].cpu().tolist(), skip_special_tokens=True)
+        if verbose:
+            print(f"{prepare_inputs['sft_format'][0]}", res1)
+
+        
+        return answer
     

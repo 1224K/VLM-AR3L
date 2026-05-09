@@ -23,7 +23,6 @@ class clip:
                 similarity = (100.0 * image_features @ text_features.T)
                 similarities.append(similarity.cpu().numpy()[0][0])
         
-        print("similarities: ", similarities)
         if similarities[0] < similarities[1]:
             return "1"
         else:

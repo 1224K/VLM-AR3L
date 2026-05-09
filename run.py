@@ -277,7 +277,7 @@ def train_and_evaluate(mode, env_name, task, algo, reward_mode, vlm, reward_step
             action_space,
             mb_size = 100, # [NOTE]
             log_dir = f"./model/{path}",
-            capacity= 5e5 if "minedojo" in env_name else 40000, # [NOTE]
+            capacity = 5e5 if "minedojo" in env_name and "train" in mode else 40000, # [NOTE]
             lr = 1e-4 if "soccer" in task else 3e-4, # [NOTE]
             ### vlm parameters
             vlm=vlm,
@@ -399,6 +399,71 @@ def train_and_evaluate(mode, env_name, task, algo, reward_mode, vlm, reward_step
 
         print(f"Total reward: {total_reward}")
         imageio.mimsave(f"gifs/{env_name}/{task}/random.gif", images, fps=10, loop=0)
+    
+    elif "eval_reward" in mode:
+        video = f"gifs/{env_name}/{task}/{algo}/demo/eval-0.gif"
+        reader = imageio.get_reader(video)
+        frames = [frame for frame in reader]   
+        
+        reward_model.load(f"./model/{path}", 921600)
+
+        images = []
+        images_with_reward = []
+        rewards = []
+
+        for t, rgb_image in enumerate(frames):
+            image = rgb_image.transpose(2, 0, 1).astype(np.float32) / 255.0  # (C, H, W)
+            image = image.reshape(1, 3, image.shape[1], image.shape[2]) # (1, C, H, W)
+
+            if reward_model is not None:
+                if reward_model.R3L_or_PBRL == "R3L":
+                    if len(images) > 0:
+                        if len(images) >= reward_k:
+                            pre_image = images[-reward_k]
+                        else:
+                            pre_image = images[0]
+                        logits = reward_model.r_hat_pair(pre_image, image)[0] # (2,)
+                        logits_inverse = reward_model.r_hat_pair(image, pre_image)[0] # (2,)
+                        probs  = softmax(logits)
+                        probs_inverse = softmax(logits_inverse)
+                        if probs[1] > 0.52 and probs_inverse[0] > 0.52:
+                            reward = pos_reward
+                        elif probs[0] > 0.52 and probs_inverse[1] > 0.52:
+                            reward = neg_reward
+                        else:
+                            reward = 0
+                    else:
+                        reward = 0
+                else:
+                    reward = reward_model.r_hat(image)
+            
+            # Draw the reward on the image
+            rewards.append(reward)
+            import matplotlib.pyplot as plt
+            if reward_model == None or reward_model.R3L_or_PBRL == "R3L":
+                plt.plot(rewards, color='C4')
+            else:
+                plt.plot(rewards, color='C0')
+            plt.title("VLM rewards")
+            plt.ylabel("reward")
+            # if reward_model == None or reward_model.R3L_or_PBRL == "R3L":
+            #     plt.ylim(neg_reward - 0.1, pos_reward + 0.1)
+            # else:
+            #     plt.ylim(-1, 1.1)
+            # plt.xlim(0, 50)
+            plt.savefig("vlm_rewards.png")
+            plt.close()
+            rewards_img = plt.imread("vlm_rewards.png")
+            rewards_img = (rewards_img * 255).astype(np.uint8)
+            rewards_img = cv2.resize(rewards_img, (rgb_image.shape[1] , int(rewards_img.shape[0] * (rgb_image.shape[1] / rewards_img.shape[1]))))
+
+            image_with_reward = utils.concatenate_images_vertical([Image.fromarray(rgb_image), Image.fromarray(rewards_img)], 10)
+
+            images.append(image)
+            images_with_reward.append(image_with_reward)
+    
+        # Save the images as a GIF
+        imageio.mimsave(f"gifs/{path}/eval_reward.gif", images_with_reward, fps=10, loop=0)
 
     elif "eval" in mode:
         # check if the model exists
@@ -997,4 +1062,6 @@ if __name__ == "__main__":
     # python ppo_mineclip.py --mode gen_data --env metaworld --task sweep-into-v2 --algo sac --reward_mode phi --reward_steps 16 --reward_k 16
     # python ppo_mineclip.py --mode gen_data --env metaworld --task sweep-into-v2 --algo sac --reward_mode sparse
     elif mode == 'gen_data':
+        train_and_evaluate(mode, env_name, task, algo, reward_mode, vlm, reward_steps, reward_noise, reward_k, 1)
+    elif mode == 'eval_reward':
         train_and_evaluate(mode, env_name, task, algo, reward_mode, vlm, reward_steps, reward_noise, reward_k, 1)

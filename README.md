@@ -1,14 +1,14 @@
-# VLM-R3L
-![Framework](demo/framework.png)
+# VLM-AR3L
+![Framework](demo/VLM-AR3L.png)
 
 ## Demo
 <p align="center">
   <img src="demo/cartpole.gif"  alt="CartPole"        width="120"/>
-  <img src="demo/rope.gif"      alt="Straighten Rope" width="120"/>
+  <img src="demo/straighten_rope.gif"      alt="Straighten Rope" width="120"/>
   <img src="demo/pass_water.gif" alt="Pass Water"     width="120"/>
   <img src="demo/soccer.gif" alt="Soccer"     width="120"/>
-  <img src="demo/sweep_into.gif" alt="Sweep Into"     width="120"/>
-  <img src="demo/drawer_open.gif"  alt="Drawer Open"        width="120"/>
+  <img src="demo/sweep.gif" alt="Sweep Into"     width="120"/>
+  <img src="demo/open_drawer.gif"  alt="Drawer Open"        width="120"/>
 </p>
 
 <p align="center">
