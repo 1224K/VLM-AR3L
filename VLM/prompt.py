@@ -122,32 +122,21 @@ env_query_triple_prompt = {}
 for env_name, prompt in task_prompt.items():
     env_query_triple_prompt[env_name] = query_triple_prompt.format(prompt)
 
-# #one stage + chain of thought
-# query_CoT_prompt = """
-# 1. What is shown in Image 1?
-# 2. What is shown in Image 2?
-# 3. The goal is {}. Is there any difference between Image 1 and Image 2 in terms of achieving the goal?
-# 4. Is Image 2 more likely to achieve the goal? 1 if yes, otherwise 0.
-# """
+phi_free_query_template = """
+The goal is {}. Is Image 2 more likely to achieve the goal? 
+"""
 
-# env_query_CoT_prompt = {}
-# for env_name, prompt in task_prompt.items():
-#     env_query_CoT_prompt[env_name] = query_CoT_prompt.format(prompt)
+phi_summary_query_template = """
+Based on the text below to the question:
+The goal is {}. Is Image 2 more likely to achieve the goal?
+{}
 
-# # two stage + chain of thought
-# thought_prompt = """
-# 1. What is shown in Image 1?
-# 2. What is shown in Image 2?
-# 3. The goal is {}. Is there any difference between Image 1 and Image 2 in terms of achieving the goal?
-# """
+Reply a single line of 1 if yes, otherwise 0.
+"""
 
-# summary_prompt = """
-# Based on the text below to the questions:
-# 1. What is shown in Image 1?
-# 2. What is shown in Image 2?
-# 3. The goal is {}. Is there any difference between Image 1 and Image 2 in terms of achieving the goal?
-# {}
+phi_free_query_env_prompts = {}
+phi_summary_env_prompts = {}
 
-# Is Image 2 more likely to achieve the goal? 
-# Reply a single line of 1 if yes, otherwise 0.
-# """
+for env_name, prompt in task_prompt.items():
+    phi_free_query_env_prompts[env_name] = phi_free_query_template.format(prompt)
+    phi_summary_env_prompts[env_name] = phi_summary_query_template.format(prompt, "{}")

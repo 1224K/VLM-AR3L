@@ -1,4 +1,5 @@
 from .prompt import env_query_prompt, env_thought_prompt, env_summary_prompt, env_clip_prompts, two_label_env_query_prompt, two_label_env_thought_prompt, two_label_env_summary_prompt, env_query_CoT_prompt
+from .prompt import phi_free_query_env_prompts, phi_summary_env_prompts
 from .phi_infer import phi
 from .deepseekVL_infer import deepseekVL
 from .clip_infer import clip
