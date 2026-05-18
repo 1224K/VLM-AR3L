@@ -36,7 +36,8 @@ python run_ppo.py --mode train --task combat_spider --reward_mode VLM-AR3L --vlm
 
 ```sh
 python run_sac.py \
-  env=metaworld_drawer-open-v2 \
+  env=metaworld \
+  task=drawer-open-v2 \
   exp_name=VLM-AR3L \
   reward_mode=VLM-AR3L \
   reward=learn_from_preference \

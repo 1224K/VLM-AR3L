@@ -11,9 +11,9 @@ env_clip_prompts = {
 
     "CartPole-v1": "pole vertically upright on top of the cart.",
     
-    "softgym_RopeFlattenEasy": "The blue rope is straightened.",
-    "softgym_PassWater": "The container, which holds water, is as close to the red circle as possible without causing too many water droplets to spill.",
-    "softgym_ClothFoldDiagonal": "The cloth is folded diagonally from top left corner to bottom right corner.",
+    "RopeFlattenEasy": "The blue rope is straightened.",
+    "PassWater": "The container, which holds water, is as close to the red circle as possible without causing too many water droplets to spill.",
+    "ClothFoldDiagonal": "The cloth is folded diagonally from top left corner to bottom right corner.",
 }
 
 task_prompt = {
@@ -29,9 +29,9 @@ task_prompt = {
 
     'CartPole-v1': "to balance the brown pole on the black cart to be upright",
 
-    "softgym_RopeFlattenEasy": "to straighten the blue rope",
-    "softgym_PassWater": "to move the container, which holds water, to be as close to the red circle as possible without causing too many water droplets to spill",
-    "softgym_ClothFoldDiagonal": "to fold the cloth diagonally from top left corner to bottom right corner",
+    "RopeFlattenEasy": "to straighten the blue rope",
+    "PassWater": "to move the container, which holds water, to be as close to the red circle as possible without causing too many water droplets to spill",
+    "ClothFoldDiagonal": "to fold the cloth diagonally from top left corner to bottom right corner",
 }
 
 # two label

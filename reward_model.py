@@ -310,7 +310,7 @@ class RewardModel:
                     self.model_relative = gen_siamese_net(self.image_height, self.image_width, self.conv_kernel_sizes, self.conv_n_channels, self.conv_strides).float().to(device)
                 if self.reward_mode == "RL-VLM-F" or self.reward_mode == "VLM-AR3L":
                     if not self.resnet:
-                        raise NotImplementedError
+                        self.model_absolute = gen_image_net(self.image_height, self.image_width, self.conv_kernel_sizes, self.conv_n_channels, self.conv_strides).float().to(device)
                     else:
                         self.model_absolute = gen_image_net2(self.env_name).float().to(device)
             
@@ -427,8 +427,6 @@ class RewardModel:
         return self.ensemble_relative[member](torch.from_numpy(x).float().to(device), torch.from_numpy(y).float().to(device))
     
     def r_hat(self, x):
-        # they say they average the rewards from each member of the ensemble_absolute, but I think this only makes sense if the rewards are already normalized
-        # but I don't understand how the normalization should be happening right now :(
         r_hats = []
         for member in range(self.de):
             r_hats.append(self.r_hat_member(x, member=member).detach().cpu().numpy())

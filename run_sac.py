@@ -34,9 +34,9 @@ class Workspace(object):
         # print(OmegaConf.to_yaml(cfg))
         # print(cfg.log_save_tb)
 
-        if cfg.env in env_clip_prompts:
-            self.cfg.prompt = env_clip_prompts[cfg.env]
-            self.cfg.clip_prompt = env_clip_prompts[cfg.env]
+        if cfg.task in env_clip_prompts:
+            self.cfg.prompt = env_clip_prompts[cfg.task]
+            self.cfg.clip_prompt = env_clip_prompts[cfg.task]
         self.reward = self.cfg.reward # what types of reward to use
         self.logger = Logger(
             self.work_dir,
@@ -55,7 +55,7 @@ class Workspace(object):
         if 'metaworld' in cfg.env:
             self.env = utils.make_metaworld_env(cfg)
             self.log_success = True
-        elif cfg.env in ["CartPole-v1", "Acrobot-v1", "MountainCar-v0", "Pendulum-v0", "RingWorld"]:
+        elif 'gym' in cfg.env:
             self.env = utils.make_classic_control_env(cfg)
         elif 'softgym' in cfg.env:
             self.env = utils.make_softgym_env(cfg)
@@ -72,17 +72,17 @@ class Workspace(object):
         
         image_height = image_width = cfg.image_size
         self.resize_factor = 1
-        if "sweep" in cfg.env or 'drawer' in cfg.env or "soccer" in cfg.env or "door" in cfg.env or "window" in cfg.env or "coffee-push" in cfg.env:
-            image_height = image_width = 300 
-        if "Rope" in cfg.env:
+        if "metaworld" in cfg.env:
+            image_height = image_width = 300
+        elif "Rope" in cfg.task:
             image_height = image_width = 240
             self.resize_factor = 3
-        elif "Water" in cfg.env:
+        elif "Water" in cfg.task:
             image_height = image_width = 360
             self.resize_factor = 2
-        if "CartPole" in cfg.env:
+        if "CartPole" in cfg.task:
             image_height = image_width = 200
-        if "Cloth" in cfg.env:
+        if "Cloth" in cfg.task:
             image_height = image_width = 360
             
         self.image_height = image_height
@@ -135,8 +135,8 @@ class Workspace(object):
             vlm_label=cfg.vlm_label,
             vlm=cfg.vlm,
             env_name=cfg.env,
-            task=cfg.env,
-            clip_prompt=env_clip_prompts[cfg.env],
+            task=cfg.task,
+            clip_prompt=env_clip_prompts[cfg.task],
             log_dir=self.logger._log_dir,
             flip_vlm_label=cfg.flip_vlm_label,
             cached_label_path=cfg.cached_label_path,
@@ -206,11 +206,11 @@ class Workspace(object):
                     rgb_image = self.env.render()
                     if self.cfg.mode != 'eval':
                         rgb_image = rgb_image[::-1, :, :]
-                        if "drawer" in self.cfg.env or "sweep" in self.cfg.env:
+                        if "drawer" in self.cfg.task or "sweep" in self.cfg.task:
                             rgb_image = rgb_image[100:400, 100:400, :]
                     else:
                         rgb_image = rgb_image[::-1, :, :]
-                elif self.cfg.env in ["CartPole-v1", "Acrobot-v1", "MountainCar-v0", "Pendulum-v0", "RingWorld"]:
+                elif "gym" in self.cfg.env:
                     rgb_image = self.env.render(mode='rgb_array')
                 elif 'softgym' in self.cfg.env:
                     rgb_image = self.env.render(mode='rgb_array', hide_picker=True)
@@ -219,8 +219,8 @@ class Workspace(object):
 
                 # add vlm reward 
                 if self.cfg.image_reward and \
-                    'Water' not in self.cfg.env and \
-                        'Rope' not in self.cfg.env:
+                    'Water' not in self.cfg.task and \
+                        'Rope' not in self.cfg.task:
                     rgb_image = cv2.resize(rgb_image, (self.image_height, self.image_width)) # NOTE: resize image here
 
                 image = rgb_image.transpose(2, 0, 1).astype(np.float32) / 255.0
@@ -361,7 +361,7 @@ class Workspace(object):
                         self.logger.log('train/' + key, value, self.step)
                     start_time = time.time()
                     
-                    if "Cloth" in self.cfg.env:
+                    if "Cloth" in self.cfg.task:
                         self.logger.dump(
                             self.step, save=((self.step > self.cfg.num_seed_steps + self.cfg.num_unsup_steps)))
                     else:
@@ -501,9 +501,9 @@ class Workspace(object):
                 if "metaworld" in self.cfg.env:
                     rgb_image = self.env.render()
                     rgb_image = rgb_image[::-1, :, :]
-                    if "drawer" in self.cfg.env or "sweep" in self.cfg.env:
+                    if "drawer" in self.cfg.task or "sweep" in self.cfg.task:
                         rgb_image = rgb_image[100:400, 100:400, :]
-                elif self.cfg.env in ["CartPole-v1", "Acrobot-v1", "MountainCar-v0", "Pendulum-v0, RingWorld"]:
+                elif "gym" in self.cfg.env:
                     rgb_image = self.env.render(mode='rgb_array')
                 elif 'softgym' in self.cfg.env:
                     rgb_image = self.env.render(mode='rgb_array', hide_picker=True)
@@ -511,8 +511,8 @@ class Workspace(object):
                     rgb_image = self.env.render(mode='rgb_array')
 
                 if self.cfg.image_reward and \
-                    'Water' not in self.cfg.env and \
-                        'Rope' not in self.cfg.env:
+                    'Water' not in self.cfg.task and \
+                        'Rope' not in self.cfg.task:
                     rgb_image = cv2.resize(rgb_image, (self.image_height, self.image_width)) # NOTE: resize image here
                 traj_images.append(rgb_image)
 
@@ -554,7 +554,7 @@ class Workspace(object):
                     self.reward_model.train()
             elif self.reward == 'clip':
                 query_image = rgb_image
-                query_prompt = env_clip_prompts[self.cfg.env] 
+                query_prompt = env_clip_prompts[self.cfg.task] 
                 reward_hat = self.CLIP.clip_infer_score(query_image, query_prompt) * 2 - 1 # actually we should scale it [-1, 1] since tanh is used in the reward model
                 if self.cfg.flip_vlm_label:
                     reward_hat = -reward_hat
