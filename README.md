@@ -24,12 +24,24 @@ Download [MineCLIP](https://drive.google.com/file/d/1uaZM1ZLBz2dZWcn85rZmjP7LV6S
 
 ## Build the Docker Images
 - ### minedojo
-    ```sh
-    cd minedojo/docker-minedojo
-    docker build -t minedojo .
-    ```
+  ```sh
+  cd docker-minedojo
+  docker build -t minedojo .
+  ```
+- ### gym & softgym & metaworld
+  ```sh
+  cd docker-metaworld
+  docker build -t metaworld .
+  ```
 
 ## Run task
+| Environment | Tasks |
+|---|---|
+| gym | CartPole, RingWorld |
+| softgym | PassWater, RopeFlattenEasy |
+| metaworld | drawer-open-v2, sweep-into-v2, soccer-v2 |
+| minedojo | combat_spider, milk_cow, shear_sheep, hunt_cow |
+
 ```sh
 python run_ppo.py --mode train --task combat_spider --reward_mode VLM-AR3L --vlm gemini2.0
 ```
