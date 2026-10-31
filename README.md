@@ -1,4 +1,5 @@
-# VLM-AR3L
+# VLM-AR3L: Vision-Language Models for Absolute and Relative Rewards in Reinforcement Learning
+[![arXiv](https://img.shields.io/badge/arXiv-2209.12753-b31b1b.svg?style=flat-square)](https://arxiv.org/abs/2607.00483)
 ![Framework](demo/VLM-AR3L.png)
 
 ## Demo
